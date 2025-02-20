@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Manajemen Keuangan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input {
+            margin: 5px 0;
+        }
+        button {
+            margin-top: 10px;
+        }
+        .output {
+            margin-top: 20px;
+            border: 1px solid #000;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Aplikasi Manajemen Keuangan</h1>
+    <label for="pengeluaranBulanan">Pengeluaran Bulanan:</label>
+    <input type="number" id="pengeluaranBulanan" placeholder="Masukkan pengeluaran bulanan"><br>
+    
+    <label for="pengeluaranTahunan">Pengeluaran Tahunan:</label>
+    <input type="number" id="pengeluaranTahunan" placeholder="Masukkan pengeluaran tahunan"><br>
+    
+    <button onclick="hitungPengeluaran()">Hitung Pengeluaran</button>
+
+    <div class="output" id="output"></div>
+
+    <script>
+        function hitungTotalPengeluaran(pengeluaranBulanan, pengeluaranTahunan) {
+            return pengeluaranBulanan * 12 + pengeluaranTahunan;
+        }
+
+        function bandingkanPengeluaran(pengeluaranBulanan, pengeluaranTahunan) {
+            if (pengeluaranBulanan > pengeluaranTahunan) {
+                return "Pengeluaran bulanan lebih besar daripada pengeluaran tahunan.";
+            } else if (pengeluaranBulanan < pengeluaranTahunan) {
+                return "Pengeluaran tahunan lebih besar daripada pengeluaran bulanan.";
+            } else {
+                return "Pengeluaran bulanan dan tahunan sama.";
+            }
+        }
+
+        function hitungRataRataPengeluaran(pengeluaranTahunan) {
+            return pengeluaranTahunan / 12;
+        }
+
+        function hitungPengeluaran() {
+            const pengeluaranBulanan = parseFloat(document.getElementById('pengeluaranBulanan').value);
+            const pengeluaranTahunan = parseFloat(document.getElementById('pengeluaranTahunan').value);
+            
+            const totalPengeluaran = hitungTotalPengeluaran(pengeluaranBulanan, pengeluaranTahunan);
+            const perbandingan = bandingkanPengeluaran(pengeluaranBulanan, pengeluaranTahunan);
+            const rataRataPengeluaran = hitungRataRataPengeluaran(pengeluaranTahunan);
+
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = `
+                <strong>Total Pengeluaran:</strong> ${totalPengeluaran} <br>
+                <strong>Perbandingan Pengeluaran:</strong> ${perbandingan} <br>
+                <strong>Rata-rata Pengeluaran Bulanan:</strong> ${rataRataPengeluaran}
+            `;
+        }
+    </script>
+</body>
+</html>
